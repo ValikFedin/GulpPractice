@@ -1,0 +1,1 @@
+"use strict";var a=10,b=11,c=a+b;console.log("main"),alert("box"),console.log("call"),console.log("outer html sa");
