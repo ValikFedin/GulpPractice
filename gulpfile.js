@@ -71,5 +71,5 @@ gulp.task('watch', (done) =>{
 });
 
 gulp.task("default", gulp.series(
-    "html","scss","js","browser-init","watch")
+    "html","scss","js","img","browser-init","watch")
 );
