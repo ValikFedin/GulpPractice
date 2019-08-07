@@ -12,8 +12,10 @@ const sass = require('gulp-sass');
 const autoprefixer = require('gulp-autoprefixer');
 const babel = require('gulp-babel');
 const imagemin = require('gulp-imagemin');
+const cache = require('gulp-cached');
 const browserSync = require('browser-sync').create();
 const uglify = require('gulp-uglify');
+const jshint = require('gulp-jshint');
 const  del = require('del');
 sass.compiler = require('node-sass');
 gulp.task('scss', (done) =>{
@@ -43,17 +45,18 @@ gulp.task("js",  (done) =>{
 })
 gulp.task('img', (done) =>{
     gulp.src('./src/img/*')
-        .pipe(imagemin())
-        .pipe(gulp.dest('./dist/img'));
+    .pipe(cache(imagemin({
+        interlaced: true
+    })))
+    .pipe(gulp.dest('./dist/img'));
     done();
 }
 );
-
 gulp.task("browser-init", (done) => {
     browserSync.init({
         server: "./dist"
     });
-    done();
+    done();ы
 });
 gulp.task("build", gulp.series(
     "clear",
