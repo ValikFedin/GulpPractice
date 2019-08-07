@@ -15,7 +15,7 @@ const imagemin = require('gulp-imagemin');
 const cache = require('gulp-cached');
 const browserSync = require('browser-sync').create();
 const uglify = require('gulp-uglify');
-const jshint = require('gulp-jshint');
+const pngquant = require('imagemin-pngquant');
 const  del = require('del');
 sass.compiler = require('node-sass');
 gulp.task('scss', (done) =>{
@@ -45,9 +45,9 @@ gulp.task("js",  (done) =>{
 })
 gulp.task('img', (done) =>{
     gulp.src('./src/img/*')
-    .pipe(cache(imagemin({
-        interlaced: true
-    })))
+    .pipe(cache(imagemin([
+        pngquant({quality: [0.5, 0.5]})
+    ])))
     .pipe(gulp.dest('./dist/img'));
     done();
 }
